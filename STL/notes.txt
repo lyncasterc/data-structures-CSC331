@@ -1,0 +1,6 @@
+Container - stores the data
+Iterator - provides a way to access the data and move through it
+Algorithms - performs operations on the data
+
+- Sequence containers
+    - items are stored sequentially

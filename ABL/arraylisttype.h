@@ -143,6 +143,7 @@ void ArrayListType<T>::removeAt(int location)
         {
             list[i] = list[i + 1];
         }
+        
         length--;
     }
 }
