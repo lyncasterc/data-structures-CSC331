@@ -4,3 +4,8 @@ Algorithms - performs operations on the data
 
 - Sequence containers
     - items are stored sequentially
+
+
+List #include <list>
+ - doubly linked list
+ - insertion and deletion at the beginning and end of the list
