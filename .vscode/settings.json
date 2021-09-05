@@ -63,6 +63,10 @@
         "typeinfo": "cpp",
         "__functional_03": "cpp",
         "memory_resource": "cpp",
-        "forward_list": "cpp"
+        "forward_list": "cpp",
+        "__tree": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "set": "cpp"
     }
 }
