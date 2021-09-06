@@ -6,7 +6,7 @@
 template<typename T> 
 class LinkedList
 {
-    private:
+    protected:
         Node<T> *head;
     public:
         LinkedList();
@@ -14,9 +14,9 @@ class LinkedList
         const LinkedList<T>& operator=(const LinkedList<T> &);
         int getLength() const;
         bool isEmpty() const;
-        void insertItem(const T &item);
-        void deleteItem(const T &item);
-        bool searchItem(const T &item) const;
+        virtual void insertItem(const T &item);
+        virtual void deleteItem(const T &item);
+        virtual bool searchItem(const T &item) const;
         void print() const;
         void copy(const LinkedList<T> &other);
         void destroy();
