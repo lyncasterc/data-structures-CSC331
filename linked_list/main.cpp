@@ -20,11 +20,9 @@ int main()
     list.insertItem(-2);
     list.insertItem(0);
     list.print();
-    list.deleteItem(-4);
-    list.deleteItem(7);
-    list.deleteItem(2);
-    list.print();
+    bool result = list.searchItem(-4);
 
-    std::cout << list.getLength();
+
+    std::cout << result;
 
 }

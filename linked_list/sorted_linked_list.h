@@ -11,7 +11,7 @@ class SortedLinkedList : public LinkedList<T>
         using LinkedList<T>::LinkedList;
         virtual void insertItem(const T &item);
         virtual void deleteItem(const T &item);
-        // virtual bool searchItem(const T &item) const;
+        virtual bool searchItem(const T &item) const;
 };
 
 template<typename T>
@@ -85,6 +85,25 @@ void SortedLinkedList<T>::deleteItem(const T &item)
 
         }
     }
+}
+
+template<typename T>
+bool SortedLinkedList<T>::searchItem(const T &item) const
+{
+    Node<T> *temp;
+    temp = this->head;
+
+    while(temp && temp->data <= item)
+    {
+        if(temp->data == item)
+        {
+            return true;
+        }
+        
+        temp = temp->next;
+    }
+
+    return false;
 }
 
 
