@@ -15,12 +15,16 @@ int main()
     list.insertItem(2);
     list.insertItem(5);
     list.insertItem(7);
-    list.insertItem(6);
     list.insertItem(4);
     list.insertItem(-4);
     list.insertItem(-2);
     list.insertItem(0);
     list.print();
+    list.deleteItem(-4);
+    list.deleteItem(7);
+    list.deleteItem(2);
+    list.print();
+
     std::cout << list.getLength();
 
 }

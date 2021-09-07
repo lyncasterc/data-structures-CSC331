@@ -10,7 +10,7 @@ class SortedLinkedList : public LinkedList<T>
     public:
         using LinkedList<T>::LinkedList;
         virtual void insertItem(const T &item);
-        // virtual void deleteItem(const T &item);
+        virtual void deleteItem(const T &item);
         // virtual bool searchItem(const T &item) const;
 };
 
@@ -43,6 +43,50 @@ void SortedLinkedList<T>::insertItem(const T &item)
         new_node->next = temp;
     }
 }
+template<typename T>
+void SortedLinkedList<T>::deleteItem(const T &item)
+{
+    Node<T> *temp, *prev;
+
+    if(!this->head)
+    {
+        std::cout << "Error: List is empty" << std::endl;
+    }
+
+    else if(this->head->data == item)
+    {
+        temp = this->head;
+        this->head = this->head->next;
+        delete temp;
+    }
+
+    else
+    {
+        temp = this->head->next;
+        prev = this->head;
+
+        while(temp)
+        {
+            if(temp->data == item)
+            {
+                prev->next = temp->next;
+                delete temp;
+                break;
+            }
+
+            if(!temp->next || temp->next->data > item)
+            {
+                std::cout << "Error: Item not found" << std::endl;
+                break;
+            }
+
+            prev = temp;
+            temp = temp->next;
+
+        }
+    }
+}
+
 
 
 
