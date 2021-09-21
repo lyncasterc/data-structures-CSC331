@@ -55,7 +55,7 @@ int main()
 
     std::cout << ages["Stiven"] << std::endl;
 
-    // finding occurences of string in map
+    // finding occurences of chars in map
 
     std::map<char, int> char_count;
     std::string name = "Emilia Telfer";

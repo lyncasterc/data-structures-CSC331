@@ -41,8 +41,9 @@ void SortedLinkedList<T>::insertItem(const T &item)
 
         prev->next = new_node;
         new_node->next = temp;
-    }
+    } 
 }
+
 template<typename T>
 void SortedLinkedList<T>::deleteItem(const T &item)
 {

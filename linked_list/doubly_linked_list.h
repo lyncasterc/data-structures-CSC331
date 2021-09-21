@@ -85,15 +85,32 @@ void DoublyLinkedList<T>::insertItem(const T &item)
         new_node->next = NULL;
         head = new_node;
     }
+
+    else if(item < head->data)
+    {
+        new_node->prev = NULL;
+        new_node->next = head;
+        head->prev = new_node;
+        head = head->prev;
+    }
+
     else
     {   
-        Node2<T> *temp = head;
+        Node2<T> *temp, *prev;
+        temp = this->head->next;
+        prev = this->head;
 
-        while(temp->next) { temp = temp->next; }
+        while(temp && item > temp->data)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
 
-        temp->next = new_node;
-        new_node->prev = temp;
-        new_node->next = NULL;
+        prev->next = new_node;
+        new_node->prev = prev;
+        new_node->next = temp;
+        if(temp)
+            temp->prev = new_node;
     }
 }
 
@@ -112,7 +129,9 @@ void DoublyLinkedList<T>::deleteItem(const T &item)
     {
         temp = head;
         head = head->next;
-        head->prev = NULL;
+        if(head)
+            head->prev = NULL;
+            
         delete temp;
     }
 

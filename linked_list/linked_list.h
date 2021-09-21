@@ -129,9 +129,7 @@ void LinkedList<T>::deleteItem(const T &item)
             temp = temp->next;
         }
     }
-
 }
-
 
 template<typename T>
 bool LinkedList<T>::searchItem(const T &item) const
