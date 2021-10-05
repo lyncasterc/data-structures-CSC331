@@ -1,24 +1,24 @@
 #include <iostream>
 #include "Stack.h"
-// #include "ListStack.h"
+#include "ListStack.h"
 
 int main()
 {
     Stack <int> s, s2;
     bool result;
-    // ListStack <int> ls;
+    ListStack <int> ls, ls_2;
 
-    s.push(1);
-    s.push(3);
-    s.push(0);
-    s.pop();
-    s.pop();
+    ls.push(1);
+    ls.push(3);
+    ls.push(9);
+   
+    ls.pop();
 
-    s2 = s;
+    ls_2 = ls;
 
-    result = s2.isEmpty();
+    result = ls.isEmpty();
 
-    std::cout << s2.Top();
+    std::cout << ls_2.Top();
 
 
 }
