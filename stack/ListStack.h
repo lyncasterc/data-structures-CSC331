@@ -1,5 +1,6 @@
 #ifndef ListStack_H
 #define ListStack_H
+#include <string>
 
 template <typename T>
 
@@ -22,9 +23,9 @@ class ListStack
         const ListStack<T> &operator= (const ListStack<T> &other);
         bool isEmpty() const;
         void push(const T &item);
-        void pop();
-        int getLength() const;
         T Top() const;
+        T pop();
+        int getLength() const;
         void copy(const ListStack<T> &other);
         void destroy();
         ~ListStack();
@@ -65,16 +66,61 @@ void ListStack<T>::push(const T &item)
     top = new_top;
 }
 
+
 template<typename T>
-void ListStack<T>::pop()
+T ListStack<T>::Top() const
 {
-    if(!isEmpty())
+    T item;
+    
+    try 
     {
-        Node<T> *node;
-        node = top;
-        top = top->next;
-        delete node;
+        if(!isEmpty())
+        {
+            item = top->data;
+        }
+
+        else
+        {
+            throw "ERROR: Stack is empty.";
+        }
     }
+
+    catch (const char *error_msg)
+    {
+        std::cout << error_msg << std::endl;
+    }
+
+    return item;
+}
+
+template<typename T>
+T ListStack<T>::pop()
+{
+    T item;
+
+    try 
+    {
+        if(!isEmpty())
+        {
+            Node<T> *node;
+            node = top;
+            item = node->data;
+            top = top->next;
+            delete node;
+        }
+        else
+        {
+            throw "ERROR: Stack is empty.";
+        }
+    }
+
+    catch(const char *error_msg)
+    {
+        std::cout << error_msg << std::endl;
+    }
+    
+    return item;
+    
 }
 
 
@@ -101,14 +147,6 @@ int ListStack<T>::getLength() const
     }
 
     return length;
-}
-
-
-//do this the way she does it for projects
-template<typename T>
-T ListStack<T>::Top() const
-{
-    return top->data;
 }
 
 
