@@ -31,7 +31,7 @@ int main()
     // std::string exp7 = "3*(4-2*(3+7))+6"; // -42
     // std::string exp8 = "8+4*(10-5/(5+10))-3*7"; // 25.6667
     // std::string exp9 = "( 3*( 4-2*( 3+7 )  ) +6/( 5+6 ) -3*4 ) +1"; // -58.454545
-    // std::cout << solution(exp9) << std::endl;
+    
 
     std::string input;
     char cont_choice = 'a';
@@ -105,6 +105,7 @@ double solution(const std::string &str)
         else
         {
             op.pop();
+            i++;
         }
     }
 
