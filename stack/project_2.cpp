@@ -3,6 +3,7 @@
 #include <cctype>
 #include <algorithm>
 #include <regex>
+#include <stack>
 #include "ListStack.h"
 
 // Programmer: Stiven Cabrera
@@ -22,43 +23,45 @@ bool is_valid_input(const std::string &expression);
 int main()
 {
     
-    // std::string exp1 = "16/2+5-11*2"; // -9
-    // std::string exp2 = "3+4*2";       // 11
-    // std::string exp3 = "2*5+8*2";     // 26
-    // std::string exp4 = "-3+4";        // 1
-    // std::string exp5 = "-3+-4";      // -7 
-    // std::string exp6 = "2+-3";          // -1
-    // std::string exp7 = "3*(4-2*(3+7))+6"; // -42
-    // std::string exp8 = "8+4*(10-5/(5+10))-3*7"; // 25.6667
-    // std::string exp9 = "( 3*( 4-2*( 3+7 )  ) +6/( 5+6 ) -3*4 ) +1"; // -58.454545
+    std::string exp1 = "16/2+5-11*2"; // -9
+    std::string exp2 = "3+4*2";       // 11
+    std::string exp3 = "2*5+8*2";     // 26
+    std::string exp4 = "-3+4";        // 1
+    std::string exp5 = "-3+-4";      // -7 
+    std::string exp6 = "2+-3";          // -1
+    std::string exp7 = "3*(4-2*(3+7))+6"; // -42
+    std::string exp8 = "8+4*(10-5/(5+10))-3*7"; // 25.6667
+    std::string exp9 = "( 3*( 4-2*( 3+7 )  ) +6/( 5+6 ) -3*4 ) +1"; // -58.454545
     
+    bool result = is_parenthesis_balanced("(3*4)-(7+2)(");
+    std::cout << result;
 
-    std::string input;
-    char cont_choice = 'a';
-    std::cout << "========CALCULATOR========\n\n";
+    // std::string input;
+    // char cont_choice = 'a';
+    // std::cout << "========CALCULATOR========\n\n";
 
-    while(cont_choice != 'q')
-    {
-        std::cout << "Inputs allowed: 0-9,+,-,*,/. Paranthesis and negative numbers are allowed.\n";
-        std::cout << "Enter an expression to be evaluated: ";
-        getline(std::cin, input);
-        remove_spaces(input);
+    // while(cont_choice != 'q')
+    // {
+    //     std::cout << "Inputs allowed: 0-9,+,-,*,/. Paranthesis and negative numbers are allowed.\n";
+    //     std::cout << "Enter an expression to be evaluated: ";
+    //     getline(std::cin, input);
+    //     remove_spaces(input);
 
-        while(!is_valid_input(input))
-        {
-            input.clear();
-            std::cout << "Invalid input!\n";
-            std::cout << "Enter an expression to be evaluated: ";
-            getline(std::cin, input);
-            remove_spaces(input);
-        }
+    //     while(!is_valid_input(input))
+    //     {
+    //         input.clear();
+    //         std::cout << "Invalid input!\n";
+    //         std::cout << "Enter an expression to be evaluated: ";
+    //         getline(std::cin, input);
+    //         remove_spaces(input);
+    //     }
 
-        std::cout << solution(input) << std::endl;
-        std::cout << "Enter q to quit program, or any other key to enter a new expression: ";
-        std::cin >> cont_choice;
-        cont_choice = tolower(cont_choice);
-        std::cin.ignore();
-    }
+    //     std::cout << solution(input) << std::endl;
+    //     std::cout << "Enter q to quit program, or any other key to enter a new expression: ";
+    //     std::cin >> cont_choice;
+    //     cont_choice = tolower(cont_choice);
+    //     std::cin.ignore();
+    // }
 
 }
 
@@ -185,28 +188,28 @@ bool is_parenthesis_balanced(const std::string &expression)
 {
     char open = '(';
     char close = ')';
-    ListStack<char> stack;
+    std::stack<char> s;
 
     for (int i = 0; expression[i] != '\0'; i++)
     {
         if(expression[i] == open)
-        { stack.push(open); }
+        { s.push(open); }
 
         else if (expression[i] == close)
         {
-            if(stack.isEmpty())
+            if(s.empty())
             {
                 return false;
             }
             else
             {
-                stack.pop();
+                s.pop();
             }
 
         }
     }
     
-    if(!stack.isEmpty())
+    if(!s.empty())
     { 
         return false; 
     }

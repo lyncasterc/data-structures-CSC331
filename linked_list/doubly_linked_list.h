@@ -19,6 +19,7 @@ class DoublyLinkedList
         DoublyLinkedList();
         DoublyLinkedList(const DoublyLinkedList<T> &);
         const DoublyLinkedList<T>& operator=(const DoublyLinkedList<T> &);
+        void printBoth() const;
         int getLength() const;
         bool isEmpty() const;
         void insertItem(const T &item);
@@ -31,6 +32,40 @@ class DoublyLinkedList
         ~DoublyLinkedList();
 
 };
+
+
+
+template<typename T>
+void DoublyLinkedList<T>::printBoth() const
+{
+    Node2<T> *node = head;
+
+    while(node->next)
+    {
+        std::cout << node->data << " ";
+        node = node->next;
+
+        if(!node->next)
+        {
+            std::cout << node->data << std::endl;
+
+        }
+    }
+
+    while(node->prev)
+    {
+        std::cout << node->data << " ";
+        node = node->prev;
+
+        if(!node->prev)
+        {
+            std::cout << node->data << std::endl;
+        }
+    }
+
+}
+
+
 
 template<typename T>
 DoublyLinkedList<T>::DoublyLinkedList() { head = NULL; }

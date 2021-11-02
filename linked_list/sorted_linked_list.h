@@ -7,12 +7,118 @@
 template<typename T>
 class SortedLinkedList : public LinkedList<T>
 {
+    private:
+        int howMany(const T &item, Node<T> *node) const; 
+
     public:
         using LinkedList<T>::LinkedList;
         virtual void insertItem(const T &item);
         virtual void deleteItem(const T &item);
         virtual bool searchItem(const T &item) const;
+        int smaller(const T &item) const;
+        void printPosition(const T &item) const;
+        void howMany(const T &item) const; 
+
 };
+
+template<typename T>
+int SortedLinkedList<T>::howMany(const T &item, Node<T> *node) const
+{
+    static int count = 0;
+    
+    if(node)
+    {
+        if(node->data == item)
+        {
+            count++;
+        }
+        howMany(item, node->next);
+    }
+    
+
+    return count; 
+
+}
+
+template<typename T>
+void SortedLinkedList<T>::howMany(const T &item) const
+{
+    int occurences = howMany(item, this->head);
+
+    if(occurences > 0)
+    {
+        std::cout << "Number of occurences: " << occurences << std::endl;
+    }
+    else
+    {
+        std::cout << "No occurences.\n";
+    }
+}
+
+
+
+
+template<typename T>
+void SortedLinkedList<T>::printPosition(const T &item) const
+{
+    int pos;
+    int count = 0;
+    bool found = false;
+    Node<T> *node = this->head;
+
+    if(!this->isEmpty())
+    {
+        
+        while(node && node->data <= item)
+        {
+            if(node->data == item)
+            {
+                found = true;
+                pos = count + 1;
+                break;
+            }
+
+            node = node->next;
+            count++;
+        }
+
+        
+        if(found)
+        {
+
+            std::cout << "Position: " << pos << std::endl;
+        }
+
+        else
+        {
+            std::cout << "ERROR: Item does not exist" << std::endl;
+        }
+
+    }
+
+    else
+    {
+        std::cout << "Error: List is empty." << std::endl;
+    }
+    
+};
+
+template<typename T>
+int SortedLinkedList<T>::smaller(const T &item) const
+{
+    int count = 0;
+    Node<T> *node;
+    node = this->head;
+
+    while(node && node->data < item) 
+    {
+        count++;
+        node = node->next;
+    }
+    
+    return count;
+};
+
 
 template<typename T>
 void SortedLinkedList<T>::insertItem(const T &item)

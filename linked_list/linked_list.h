@@ -8,10 +8,17 @@ class LinkedList
 {
     protected:
         Node<T> *head;
+    private:
+        void greater(const T &item, Node<T> *node) const;
+        int occurences(const T &item, Node<T> *node) const;
     public:
         LinkedList();
         LinkedList(const LinkedList<T> &);
+        void occurences(const T &item) const; 
         const LinkedList<T>& operator=(const LinkedList<T> &);
+        int getLargest() const;
+        void greater(const T &item) const;
+        void replaceItem(const T &old_item, const T &new_item);
         int getLength() const;
         bool isEmpty() const;
         virtual void insertItem(const T &item);
@@ -23,6 +30,129 @@ class LinkedList
         void reverseList();
         ~LinkedList();
 };
+
+
+template<typename T>
+int LinkedList<T>::occurences(const T &item, Node<T> *node) const
+{
+    
+    if(node)
+    {
+        if(node->data == item)
+        {
+            return 1 + occurences(item, node->next);
+        }
+
+        else
+        {
+            return occurences(item, node->next);
+        }
+    }
+
+    else
+    {
+        return 0;
+    }
+
+}
+
+template<typename T>
+void LinkedList<T>::occurences(const T &item) const
+{
+    Node<T> *node;
+    node = head;
+
+    int count = occurences(item, node);
+
+    if(count > 0)
+    {
+        std::cout << "Number of occurences: " << count << std::endl;
+    }
+    else
+    {
+        std::cout << "No occurences.\n";
+    }
+}
+
+
+
+
+
+
+
+template<typename T>
+void LinkedList<T>::greater(const T &item, Node<T> *node) const
+{
+
+    if(node)
+    {
+        if(node->data > item)
+        {
+            std::cout << node->data << " ";
+        }
+        greater(item, node->next);
+    }
+};
+
+template<typename T>
+void LinkedList<T>::greater(const T &item) const
+{
+    std::cout << "Nodes greater: ";
+    greater(item, head);
+};
+
+
+
+
+template<typename T>
+int LinkedList<T>::getLargest() const
+{
+    int max = 0;
+    Node<T> *node = head;
+
+    if(!isEmpty())
+    {
+        while(node)
+        {
+            if(node->data > max)
+            {
+                max = node->data;
+            }
+
+            node = node->next;
+        }
+    }
+    
+    else 
+    {
+        max = -9999;
+        std::cout << "ERROR: Item does not exist" << std::endl;
+    }
+
+    return max;
+}   
+
+template<typename T>
+void LinkedList<T>::replaceItem(const T &old_item, const T &new_item)
+{
+    int rep_count = 0;
+    Node<T> *node = head;
+    print();
+
+    while(node)
+    {
+        if(node->data == old_item)
+        {
+            node->data = new_item;
+            rep_count++;
+        }
+
+        node = node->next;
+    }
+
+    std::cout << "Replacements: " << rep_count << std::endl; 
+    print();
+}   
 
 template<typename T>
 LinkedList<T>::LinkedList() { head = NULL; }
