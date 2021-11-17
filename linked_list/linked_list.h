@@ -76,10 +76,6 @@ void LinkedList<T>::occurences(const T &item) const
 
 
 
-
-
-
-
 template<typename T>
 void LinkedList<T>::greater(const T &item, Node<T> *node) const
 {
