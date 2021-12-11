@@ -18,14 +18,15 @@ class Graph
         void addVertex (T vertex);
         void addEdge (T from_vertex, T to_vertex);
         void deleteVertex (T);
-        void deleteEdge (T, T);
+        // void deleteEdge (T, T);
         int getIndex (T vertex);
-        // void setVisited();
-        // void setVertexVisited (T);
-        // bool isVertexVisited (T);
+        void resetVisited();
+        void setVertexVisited (T vertex);
+        bool isVertexVisited (T vertex);
         void printOutgoingEdges();
         void printIngoingEdges();
         // void printVertices();
+        void bfs();
         bool isSymmetric();
 };
 
@@ -149,6 +150,34 @@ void Graph<T> :: printIngoingEdges()
     }   
 }
 
+template <class T>
+void Graph<T>::resetVisited()
+{
+    for ( int i = 0; i < num_of_vertices; i++ )
+    {
+        visited[i] = false;
+    }
+}
+
+template <class T>
+void Graph<T> :: setVertexVisited (T vertex)
+{
+    int index = getIndex(vertex);
+    if(index != -1)
+    {
+        visited[index] = true;
+    }
+}
+
+
+template <class T>
+bool Graph<T>::isVertexVisited (T vertex)
+{
+    int index = getIndex(vertex);
+    return visited[index];
+
+}
+
 template<typename T>
 bool Graph<T>::isSymmetric()
 {
@@ -167,6 +196,35 @@ bool Graph<T>::isSymmetric()
     }
     
     return true;
+}
+
+// bfs
+template<typename T>    
+void Graph<T>::bfs()
+{
+    resetVisited();
+
+    // loop through all vertices
+    for (size_t i = 0; i < num_of_vertices; i++)
+    {
+        // if vertex is not visited
+        if(!visited[i])
+        {
+            std::cout << vertices[i] << " ";
+            visited[i] = true;
+
+            // loop through all adjacent vertices
+            for (size_t j = 0; j < num_of_vertices; j++)
+            {
+                // if adjacent vertex is not visited, print it
+                if(edges[i][j] == 1 && !visited[j])
+                { 
+                    std::cout << vertices[j] << " ";
+                    visited[j] = true;
+                }
+            }
+        }
+    }
 }
 
 
