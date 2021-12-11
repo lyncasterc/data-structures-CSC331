@@ -1,6 +1,7 @@
 #ifndef Graph_H
 #define Graph_H
 #include <iostream>
+#include <stack>
 
 template<typename T>
 class Graph
@@ -27,6 +28,7 @@ class Graph
         void printIngoingEdges();
         // void printVertices();
         void bfs();
+        void dfs(T vertex);
         bool isSymmetric();
 };
 
@@ -224,6 +226,28 @@ void Graph<T>::bfs()
                 }
             }
         }
+    }
+}
+
+// dfs
+template<typename T>
+void Graph<T>::dfs(T vertex)
+{
+    int i = getIndex(vertex);
+
+    if(!visited[i])
+    {
+        std::cout << vertices[i] << " ";
+        visited[i] = true;
+
+        for (size_t j = 0; j < num_of_vertices; j++)
+        {
+            if(edges[i][j] == 1 && !visited[j])
+            {
+                dfs(vertices[j]);
+            }
+        }
+        
     }
 }
 

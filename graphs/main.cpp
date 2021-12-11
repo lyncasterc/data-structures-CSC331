@@ -64,7 +64,8 @@ int main()
     g2.addEdge('G', 'E');
     g2.addEdge('G', 'F');
 
-    g2.bfs();
+    // g2.bfs();
+    g2.dfs('A');
 
 
 
